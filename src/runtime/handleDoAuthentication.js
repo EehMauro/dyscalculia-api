@@ -12,7 +12,7 @@ export default async function (config, state, req, res, next) {
 
     if (username !== 'admin') throw 'invalid user';
 
-    if (password !== 'admin') throw 'invalid password';
+    if (password !== 'discalculia17') throw 'invalid password';
 
     bunyan.info('[DO-AUTHENTICATION] success');
 
