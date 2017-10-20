@@ -128,7 +128,7 @@ export default [
   {
     id: 'q19',
     type: 'visuospatial-question',
-    label: 'Seleccione la forma',
+    label: 'Seleccione la figura que es igual a la que se muestra a continuación',
     image: '/images/visuospatial.png',
     options: ['/images/visuospatial-answer-1.png', '/images/visuospatial-answer-2.png', '/images/visuospatial-answer-3.png'],
     correctAnswer: 1
