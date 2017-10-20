@@ -115,7 +115,7 @@ export default [
   {
     id: 'q17',
     type: 'scale-question',
-    label: 'Indique la posición de la escala a la que pertenece el número 7',
+    label: 'Indique la posición de la escala a la que pertenece el número 70',
     correctAnswer: 70
   },
   {
