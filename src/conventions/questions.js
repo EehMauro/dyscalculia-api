@@ -108,7 +108,7 @@ export default [
   {
     id: 'q16',
     type: 'multiple-choice-question',
-    label: '¿?',
+    label: 'Quiero comprar un reloj que cuesta $572 y un cuadro de $512, ¿Me alcanza $1000 para comprar ambos?',
     options: ['Si', 'No'],
     correctAnswer: 'No'
   },
@@ -116,7 +116,7 @@ export default [
     id: 'q17',
     type: 'scale-question',
     label: 'Indique la posición de la escala a la que pertenece el número 7',
-    correctAnswer: 7
+    correctAnswer: 70
   },
   {
     id: 'q18',
@@ -131,7 +131,7 @@ export default [
     label: 'Seleccione la forma',
     image: '/images/visuospatial.png',
     options: ['/images/visuospatial-answer-1.png', '/images/visuospatial-answer-2.png', '/images/visuospatial-answer-3.png'],
-    correctAnswer: 2
+    correctAnswer: 1
   },
   {
     id: 'q20',
@@ -139,6 +139,6 @@ export default [
     label: '¿La imagen espejada es igual a la original?',
     imageOriginal: '/images/mirror-1.png',
     imageMirrored: '/images/mirror-2.png',
-    correctAnswer: 'Si'
+    correctAnswer: 'yes'
   }
 ];
