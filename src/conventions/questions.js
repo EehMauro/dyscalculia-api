@@ -2,23 +2,23 @@ export default [
   {
     id: 'q01',
     type: 'multiple-choice-question',
-    label: '¿Cuánto es 13 + 39?',
-    options: ['26', '49', '52'],
-    correctAnswer: '52'
-  },
-  {
-    id: 'q02',
-    type: 'multiple-choice-question',
     label: '¿Cuál es menor: 27 o 32?',
     options: ['27', '32'],
     correctAnswer: '27'
   },
   {
-    id: 'q03',
+    id: 'q02',
     type: 'multiple-choice-question',
     label: '¿Cuánto es el doble de 8?',
     options: ['16', '4', '10'],
     correctAnswer: '16'
+  },
+  {
+    id: 'q03',
+    type: 'multiple-choice-question',
+    label: '¿Cuánto es 13 + 39?',
+    options: ['26', '49', '52'],
+    correctAnswer: '52'
   },
   {
     id: 'q04',
