@@ -104,5 +104,41 @@ export default [
     image: '/images/glasses.png',
     options: ['Entre 50 y 100', 'Entre 0 y 20', 'Más de 200'],
     correctAnswer: 'Entre 50 y 100'
+  },
+  {
+    id: 'q16',
+    type: 'multiple-choice-question',
+    label: '¿?',
+    options: ['Si', 'No'],
+    correctAnswer: 'No'
+  },
+  {
+    id: 'q17',
+    type: 'scale-question',
+    label: 'Indique la posición de la escala a la que pertenece el número 7',
+    correctAnswer: 7
+  },
+  {
+    id: 'q18',
+    type: 'fraction-question',
+    label: 'Ingrese la fracción equivalente a la parte coloreada de la siguiente figura',
+    image: '/images/fraction.png',
+    correctAnswer: '3/16'
+  },
+  {
+    id: 'q19',
+    type: 'visuospatial-question',
+    label: 'Seleccione la forma',
+    image: '/images/visuospatial.png',
+    options: ['/images/visuospatial-answer-1.png', '/images/visuospatial-answer-2.png', '/images/visuospatial-answer-3.png'],
+    correctAnswer: 2
+  },
+  {
+    id: 'q20',
+    type: 'mirror-question',
+    label: '¿La imagen espejada es igual a la original?',
+    imageOriginal: '/images/mirror-1.png',
+    imageMirrored: '/images/mirror-2.png',
+    correctAnswer: 'Si'
   }
 ];
