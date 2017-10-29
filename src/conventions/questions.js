@@ -115,15 +115,16 @@ export default [
   {
     id: 'q17',
     type: 'scale-question',
-    label: 'Indique la posición de la escala a la que pertenece el número 70',
+    label: 'Deslizá el círculo sobre la linea y ubicalo en la posición que corresponda al número 70',
     correctAnswer: 70
   },
   {
     id: 'q18',
-    type: 'fraction-question',
-    label: 'Ingrese la fracción equivalente a la parte coloreada de la siguiente figura',
+    type: 'multiple-choice-question',
+    label: '¿Que porcentaje de la figura está coloreada?',
     image: '/images/fraction.png',
-    correctAnswer: '3/16'
+    options: ['Menor a 10', 'Entre 10 y 25', 'Entre 25 y 50'],
+    correctAnswer: 'Entre 10 y 25'
   },
   {
     id: 'q19',
@@ -136,9 +137,9 @@ export default [
   {
     id: 'q20',
     type: 'mirror-question',
-    label: '¿La imagen espejada es igual a la original?',
+    label: '¿Son estas imágenes figuras espejadas una de la otra?',
     imageOriginal: '/images/mirror-1.png',
     imageMirrored: '/images/mirror-2.png',
-    correctAnswer: 'yes'
+    correctAnswer: 'Si'
   }
 ];

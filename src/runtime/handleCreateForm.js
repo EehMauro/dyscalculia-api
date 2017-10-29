@@ -20,6 +20,7 @@ export default async function (config, state, req, res, next) {
       gender: formData.gender,
       educationLevel: formData.educationLevel,
       comment: formData.comment,
+      triedMoravec: formData.triedMoravec,
       questions: formData.questions.map(question => ({
         id: question.id,
         answer: question.answer,
