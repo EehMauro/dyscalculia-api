@@ -1,4 +1,4 @@
-import { generateToken } from '../utils';
+import { generateSessionToken } from '../utils';
 
 export default async function (config, state, req, res, next) {
 
@@ -16,7 +16,7 @@ export default async function (config, state, req, res, next) {
 
     bunyan.info('[DO-AUTHENTICATION] success');
 
-    let token = generateToken(config, 'administrator');
+    let token = generateSessionToken(config, 'administrator');
 
     res.send(200, { token });
 

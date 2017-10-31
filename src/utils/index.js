@@ -1,7 +1,11 @@
-import checkSession from './checkSession';
-import generateToken from './generateToken';
+import checkSessionToken from './checkSessionToken';
+import checkFormToken from './checkFormToken';
+import generateSessionToken from './generateSessionToken';
+import generateFormToken from './generateFormToken';
 
 export {
-  checkSession,
-  generateToken
+  checkSessionToken,
+  checkFormToken,
+  generateSessionToken,
+  generateFormToken
 }

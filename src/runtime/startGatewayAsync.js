@@ -1,11 +1,12 @@
 import curry from 'curry';
 import handleListQuestions from './handleListQuestions';
 import handleCreateForm from './handleCreateForm';
+import handleUpdateForm from './handleUpdateForm';
 import handleListForms from './handleListForms';
 import handleDetailForm from './handleDetailForm';
 import handleDoAuthentication from './handleDoAuthentication';
 import handleGetSession from './handleGetSession';
-import { checkSession } from '../utils';
+import { checkSessionToken, checkFormToken } from '../utils';
 
 export default async function (config, state) {
 
@@ -22,15 +23,21 @@ export default async function (config, state) {
     curry(handleCreateForm)(config, state)
   );
 
+  restify.put(
+    '/forms',
+    curry(checkFormToken)(config, state),
+    curry(handleUpdateForm)(config, state)
+  );
+
   restify.get(
     '/forms',
-    curry(checkSession)(config, state),
+    curry(checkSessionToken)(config, state),
     curry(handleListForms)(config, state)
   );
 
   restify.get(
     '/forms/:id',
-    curry(checkSession)(config, state),
+    curry(checkSessionToken)(config, state),
     curry(handleDetailForm)(config, state)
   );
 
@@ -41,7 +48,7 @@ export default async function (config, state) {
 
   restify.get(
     '/session',
-    curry(checkSession)(config, state),
+    curry(checkSessionToken)(config, state),
     curry(handleGetSession)(config, state)
   );
 
