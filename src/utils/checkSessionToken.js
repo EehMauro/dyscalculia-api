@@ -4,7 +4,7 @@ export default function ({ JWT_SECRET }, state, req, res, next) {
 
   try {
 
-    let token = req.headers.authorization ? req.headers.authorization.split(' ').pop() : null;
+    let token = req.headers.authorization ? req.headers.authorization.split(' ').pop() : (req.query.token ? req.query.token : null);
 
     if (!token) throw 'missing token';
 

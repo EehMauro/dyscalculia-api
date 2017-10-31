@@ -13,6 +13,7 @@
     "bunyan": "^1.8.12",
     "curry": "^1.2.0",
     "dotenv": "^4.0.0",
+    "json2csv": "^3.11.5",
     "jsonwebtoken": "^8.0.1",
     "moment": "^2.18.1",
     "restify": "^6.0.1",

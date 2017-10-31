@@ -12,7 +12,7 @@ export default async function (config, state, req, res, next) {
 
     if (!formId) throw 'missing formId parameter';
 
-    let form = await getItem({ TableName: FORMS_TABLE, Key: { id: formId } }, dynamoClient);
+    let form = await getItem({ TableName: FORMS_TABLE, Key: { email: formId } }, dynamoClient);
 
     if (!form) throw 'form not exists';
 

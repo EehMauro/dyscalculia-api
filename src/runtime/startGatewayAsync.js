@@ -3,6 +3,7 @@ import handleListQuestions from './handleListQuestions';
 import handleCreateForm from './handleCreateForm';
 import handleUpdateForm from './handleUpdateForm';
 import handleListForms from './handleListForms';
+import handleFormsCsv from './handleFormsCsv';
 import handleDetailForm from './handleDetailForm';
 import handleDoAuthentication from './handleDoAuthentication';
 import handleGetSession from './handleGetSession';
@@ -33,6 +34,12 @@ export default async function (config, state) {
     '/forms',
     curry(checkSessionToken)(config, state),
     curry(handleListForms)(config, state)
+  );
+
+  restify.get(
+    '/forms/csv/:type',
+    curry(checkSessionToken)(config, state),
+    curry(handleFormsCsv)(config, state)
   );
 
   restify.get(
