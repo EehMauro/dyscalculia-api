@@ -45,6 +45,8 @@ function getQuestions (forms) {
     );
   };
   let csvData = json2csv({
+    excelStrings: true,
+    del: ';',
     fields: [
       { label: 'ID', value: 'id' },
       ...questionLabels
@@ -59,6 +61,8 @@ function getQuestions (forms) {
 
 function getData (forms) {
   let csvData = json2csv({
+    excelStrings: true,
+    del: ';',
     fields: [
       { label: 'ID', value: 'id' },
       { label: 'FECHA', value: 'ts' },
@@ -81,7 +85,7 @@ function getData (forms) {
       gender: form.gender || '',
       educationLevel: form.educationLevel || '',
       triedMoravec: form.triedMoravec || '',
-      comment: form.comment ? form.comment.replace(/,/g, ';') : '',
+      comment: form.comment ? form.comment.replace(/;/g, ',') : '',
       isFinished: form.isFinished ? 'Si' : 'No',
       answeredQuestionsAmount: form.answeredQuestionsAmount || '',
       correctQuestionsAmount: form.correctQuestionsAmount || '',
@@ -93,8 +97,10 @@ function getData (forms) {
 
 function getSpecifications () {
   let csvData = json2csv({
+    excelStrings: true,
+    del: ';',
     fields: [
-      { label: 'ID', value: 'label' },
+      { label: 'ID', value: 'id' },
       { label: 'PREGUNTA', value: 'label' },
       { label: '0', value: 'opt0' },
       { label: '1', value: 'opt1' },
@@ -115,7 +121,7 @@ function getSpecifications () {
         correct: '',
       };
       if (question.type === 'multiple-choice-question') {
-        for (let i = 0; i < question.options; i++) {
+        for (let i = 0; i < question.options.length; i++) {
           record[`opt${ i+1 }`] = question.options[i];
         }
         record.correct = question.options.indexOf(question.correctAnswer) + 1;
@@ -192,7 +198,7 @@ export default async function (config, state, req, res, next) {
     bunyan.info('[FORMS-CSV] success');
 
     res.set({ 'Content-Disposition': `attachment; filename='${ type }.csv'` });
-    res.setHeader('Content-type', 'text/csv');
+    res.setHeader('Content-type', 'text/csv; charset=UTF-8');
     res.send(csvData);
 
   } catch (error) {
