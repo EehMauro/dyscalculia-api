@@ -7,8 +7,8 @@ function mapQuestions (questions) {
   let data = {};
   for (let i = 0; i < questions.length; i++) {
     data[`${ questions[i].id.toUpperCase() }_CORRECTA`] = questions[i].isCorrect ? 1 : 0;
-    data[`${ questions[i].id.toUpperCase() }_RESPUESTA`] = questions[i].answer;
-    data[`${ questions[i].id.toUpperCase() }_TIEMPO`] = questions[i].completionTime;
+    data[`${ questions[i].id.toUpperCase() }_RESPUESTA`] = questions[i].answer || -999;
+    data[`${ questions[i].id.toUpperCase() }_TIEMPO`] = questions[i].completionTime || -999;
   }
   return data;
 }
@@ -61,8 +61,8 @@ function getData (forms) {
       triedMoravec: form.triedMoravec || '',
       comment: form.comment ? form.comment.replace(/,/g, ';') : '',
       isFinished: form.isFinished ? 'Si' : 'No',
-      answeredQuestionsAmount: form.answeredQuestionsAmount,
-      correctQuestionsAmount: form.correctQuestionsAmount,
+      answeredQuestionsAmount: form.answeredQuestionsAmount || '',
+      correctQuestionsAmount: form.correctQuestionsAmount || '',
       totalCompletionTime: form.totalCompletionTime || ''
     }))
   });
