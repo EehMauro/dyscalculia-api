@@ -26,7 +26,7 @@ export default async function (config, state, req, res, next) {
         email: formData.email,
         age: formData.age || null,
         gender: formData.gender || null,
-        educationLevel: formData.educationLeve || null,
+        educationLevel: formData.educationLevel || null,
         requestInfo: {
           remoteAddress: req.headers['x-forwarded-for'] || req.connection.remoteAddress,
           userAgent: parseUA(req.headers['user-agent']).toString(),
