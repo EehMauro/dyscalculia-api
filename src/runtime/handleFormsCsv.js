@@ -32,6 +32,7 @@ function mapQuestions (form) {
       }
     }
   }
+  return data;
 }
 
 function getQuestions (forms) {
