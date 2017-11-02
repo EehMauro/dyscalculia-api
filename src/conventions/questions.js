@@ -123,8 +123,8 @@ export default [
     type: 'multiple-choice-question',
     label: '¿Que porcentaje de la figura está coloreada?',
     image: '/images/fraction.png',
-    options: ['Menor a 10', 'Entre 10 y 25', 'Entre 25 y 50'],
-    correctAnswer: 'Entre 10 y 25'
+    options: ['Menor a 10%', 'Entre 10% y 25%', 'Entre 25% y 50%'],
+    correctAnswer: 'Entre 10% y 25%'
   },
   {
     id: 'q19',
