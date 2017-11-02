@@ -3,30 +3,35 @@ import json2csv from 'json2csv';
 import { scanItems } from '../persistence';
 import { FORMS_TABLE, questions } from '../conventions';
 
-function mapQuestions (fquestions) {
+function mapQuestions (form) {
   let data = {};
-  for (let i = 0; i < fquestions.length; i++) {
-    data[`${ fquestions[i].id.toUpperCase() }_CORRECTA`] = fquestions[i].isCorrect ? 1 : 0;
-    data[`${ fquestions[i].id.toUpperCase() }_TIEMPO`] = fquestions[i].completionTime || -999;
-    if (fquestions[i].answer) {
-      let question = questions.find(q => q.id === fquestions[i].id);
-      if (question.type === 'multiple-choice-question') {
-        data[`${ fquestions[i].id.toUpperCase() }_RESPUESTA`] = question.options.indexOf(fquestions[i].answer) + 1;
-      }
-      if (question.type === 'scale-question') {
-        data[`${ fquestions[i].id.toUpperCase() }_RESPUESTA`] = fquestions[i].isCorrect ? 1 : 0;
-      }
-      if (question.type === 'visuospatial-question') {
-        data[`${ fquestions[i].id.toUpperCase() }_RESPUESTA`] = fquestions[i].answer;
-      }
-      if (question.type === 'mirror-question') {
-        data[`${ fquestions[i].id.toUpperCase() }_RESPUESTA`] = fquestions[i].answer === 'Si' ? 1 : 0;
-      }
+  for (let question of questions) {
+    let questionId = question.id.toUpperCase();
+    let q = form.questions.find(q => q.id === question.id);
+    if (!q) {
+      data[`${ questionId }_CORRECTA`] = 0;
+      data[`${ questionId }_RESPUESTA`] = -999;
+      data[`${ questionId }_TIEMPO`] = -999;
     } else {
-      data[`${ fquestions[i].id.toUpperCase() }_RESPUESTA`] = -999;
+      let { isCorrect, completionTime, answer } = q;
+      data[`${ questionId }_CORRECTA`] = isCorrect ? 1 : 0;
+      data[`${ questionId }_TIEMPO`] = completionTime || -999;
+      switch (question.type) {
+        case 'multiple-choice-question':
+          data[`${ questionId }_RESPUESTA`] = question.options.indexOf(answer) + 1;
+          break;
+        case 'scale-question':
+          data[`${ questionId }_RESPUESTA`] = isCorrect ? 1 : 0;
+          break;
+        case 'visuospatial-question':
+          data[`${ questionId }_RESPUESTA`] = answer;
+          break;
+        case 'mirror-question':
+          data[`${ questionId }_RESPUESTA`] = answer === 'Si' ? 1 : 0;
+          break;
+      }
     }
   }
-  return data;
 }
 
 function getQuestions (forms) {
@@ -45,7 +50,7 @@ function getQuestions (forms) {
     ],
     data: forms.map(form => ({
       id: form.id,
-      ...mapQuestions(form.questions)
+      ...mapQuestions(form)
     }))
   });
   return csvData;
