@@ -80,7 +80,7 @@ export default async function (config, state, req, res, next) {
         age: form.age || '',
         gender: form.gender || '',
         educationLevel: form.educationLevel || '',
-        triedMoravec: form.triedMoravec,
+        triedMoravec: form.triedMoravec || '',
         comment: form.comment ? form.comment.replace(/,/g, ';') : '',
         isFinished: form.isFinished ? 'Si' : 'No',
         answeredQuestionsAmount: form.answeredQuestionsAmount,
