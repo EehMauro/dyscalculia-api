@@ -72,45 +72,45 @@ export default [
   {
     id: 'q11',
     type: 'multiple-choice-question',
+    label: 'Quiero comprar un reloj que cuesta $572 y un cuadro de $512, ¿Me alcanzan $1000 para comprar ambos?',
+    options: ['Si', 'No'],
+    correctAnswer: 'No'
+  },
+  {
+    id: 'q12',
+    type: 'multiple-choice-question',
     label: 'Un teatro tiene 12 secciones. Cada sección tiene 8 filas y cada fila tiene 10 asientos. ¿Cuántos asientos hay en total?',
     options: ['200 asientos', '960 asientos', '216 asientos'],
     correctAnswer: '960 asientos'
   },
   {
-    id: 'q12',
+    id: 'q13',
     type: 'multiple-choice-question',
     label: '¿Qué expresión utilizaría para resolver este problema? La temperatura a las cuatro en punto era de 25°C. A las nueve de la noche, era de 13°C. ¿Cuánto bajó la temperatura?',
     options: ['9 - 4', '25 + 13', '25 - 13', '25 + 4 - 13'],
     correctAnswer: '25 - 13'
   },
   {
-    id: 'q13',
+    id: 'q14',
     type: 'multiple-choice-question',
     label: '¿Qué diferencia es menor, la diferencia entre 99 y 92 o la diferencia entre 25 y 11?',
     options: ['La diferencia entre 99 y 92', 'La diferencia entre 25 y 11'],
     correctAnswer: 'La diferencia entre 99 y 92'
   },
   {
-    id: 'q14',
+    id: 'q15',
     type: 'multiple-choice-question',
     label: 'En una clase hay 30 alumnos. El día que faltan 6, el porcentaje de inasistencias es...',
     options: ['6%', '5%', '2%', '20%'],
     correctAnswer: '20%'
   },
   {
-    id: 'q15',
+    id: 'q16',
     type: 'multiple-choice-question',
     label: '¿Aproximadamente cuántos vasos estimás que hay?',
     image: '/images/glasses.png',
     options: ['Entre 50 y 100', 'Entre 0 y 20', 'Más de 200'],
     correctAnswer: 'Entre 50 y 100'
-  },
-  {
-    id: 'q16',
-    type: 'multiple-choice-question',
-    label: 'Quiero comprar un reloj que cuesta $572 y un cuadro de $512, ¿Me alcanza $1000 para comprar ambos?',
-    options: ['Si', 'No'],
-    correctAnswer: 'No'
   },
   {
     id: 'q17',
