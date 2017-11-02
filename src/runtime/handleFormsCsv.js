@@ -91,6 +91,57 @@ function getData (forms) {
   return csvData;
 }
 
+function getSpecifications () {
+  let csvData = json2csv({
+    fields: [
+      { label: 'ID', value: 'label' },
+      { label: 'PREGUNTA', value: 'label' },
+      { label: '0', value: 'opt0' },
+      { label: '1', value: 'opt1' },
+      { label: '2', value: 'opt2' },
+      { label: '3', value: 'opt3' },
+      { label: '4', value: 'opt4' },
+      { label: 'CORRECTA', value: 'correct' }
+    ],
+    data: questions.map(question => {  
+      let record = {
+        id: question.id.toUpperCase(),
+        label: question.label,
+        opt0: '',
+        opt1: '',
+        opt2: '',
+        opt3: '',
+        opt4: '',
+        correct: '',
+      };
+      if (question.type === 'multiple-choice-question') {
+        for (let i = 0; i < question.options; i++) {
+          record[`opt${ i+1 }`] = question.options[i];
+        }
+        record.correct = question.options.indexOf(question.correctAnswer) + 1;
+      }
+      if (question.type === 'scale-question') {
+        record.opt0 = `DIFERENTE DE ${ question.correctAnswer }`;
+        record.opt1 = question.correctAnswer;
+        record.correct = 1;
+      }
+      if (question.type === 'visuospatial-question') {
+        record.opt1 = 1;
+        record.opt2 = 2;
+        record.opt3 = 3;
+        record.correct = 1;
+      }
+      if (question.type === 'mirror-question') {
+        record.opt0 = 'No';
+        record.opt1 = 'Si';
+        record.correct = 1;
+      }
+      return record;
+    })
+  });
+  return csvData;
+}
+
 export default async function (config, state, req, res, next) {
 
   const { bunyan, dynamoClient } = state;
@@ -101,34 +152,44 @@ export default async function (config, state, req, res, next) {
 
   try {
 
-    let FilterExpression = '';
-    let ExpressionAttributeNames = {};
-    let ExpressionAttributeValues = {};
+    let csvData = null;
 
-    if (fromDate) {
-      FilterExpression += (FilterExpression === '' ? '' : ' AND ') + '#ts >= :fromDate';
-      ExpressionAttributeNames['#ts'] = 'ts';
-      ExpressionAttributeValues[':fromDate'] = fromDate;
+    if (type !== 'specification') {
+
+      let FilterExpression = '';
+      let ExpressionAttributeNames = {};
+      let ExpressionAttributeValues = {};
+
+      if (fromDate) {
+        FilterExpression += (FilterExpression === '' ? '' : ' AND ') + '#ts >= :fromDate';
+        ExpressionAttributeNames['#ts'] = 'ts';
+        ExpressionAttributeValues[':fromDate'] = fromDate;
+      }
+
+      if (toDate) {
+        FilterExpression += (FilterExpression === '' ? '' : ' AND ') + '#ts <= :toDate';
+        ExpressionAttributeNames['#ts'] = 'ts';
+        ExpressionAttributeValues[':toDate'] = toDate;
+      }
+
+      let params = {
+        TableName: FORMS_TABLE,
+        FilterExpression: FilterExpression !== '' ? FilterExpression : undefined,
+        ExpressionAttributeNames: Object.keys(ExpressionAttributeNames).length ? ExpressionAttributeNames : undefined,
+        ExpressionAttributeValues: Object.keys(ExpressionAttributeValues).length ? ExpressionAttributeValues : undefined
+      };
+
+      let { results } = await scanItems(params, dynamoClient);
+
+      csvData = type === 'alldata' ? getData(results) : getQuestions(results);
+
+    } else {
+
+      csvData = getSpecifications();
+
     }
 
-    if (toDate) {
-      FilterExpression += (FilterExpression === '' ? '' : ' AND ') + '#ts <= :toDate';
-      ExpressionAttributeNames['#ts'] = 'ts';
-      ExpressionAttributeValues[':toDate'] = toDate;
-    }
-
-    let params = {
-      TableName: FORMS_TABLE,
-      FilterExpression: FilterExpression !== '' ? FilterExpression : undefined,
-      ExpressionAttributeNames: Object.keys(ExpressionAttributeNames).length ? ExpressionAttributeNames : undefined,
-      ExpressionAttributeValues: Object.keys(ExpressionAttributeValues).length ? ExpressionAttributeValues : undefined
-    };
-
-    let { results } = await scanItems(params, dynamoClient);
-
-    bunyan.info('[FORMS-CSV] success', { results: results.length });
-
-    let csvData = type === 'alldata' ? getData(results) : getQuestions(results);
+    bunyan.info('[FORMS-CSV] success');
 
     res.set({ 'Content-Disposition': `attachment; filename='${ type }.csv'` });
     res.setHeader('Content-type', 'text/csv');
