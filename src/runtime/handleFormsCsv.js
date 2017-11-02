@@ -6,11 +6,67 @@ import { FORMS_TABLE, questions } from '../conventions';
 function mapQuestions (questions) {
   let data = {};
   for (let i = 0; i < questions.length; i++) {
-    data[`q${ i }IsCorrect`] = questions[i].isCorrect ? 'Si' : 'No';
-    data[`q${ i }Answer`] = questions[i].answer;
-    data[`q${ i }CompletionTime`] = questions[i].completionTime;
+    data[`${ questions[i].id.toUpperCase() }_CORRECTA`] = questions[i].isCorrect ? 1 : 0;
+    data[`${ questions[i].id.toUpperCase() }_RESPUESTA`] = questions[i].answer;
+    data[`${ questions[i].id.toUpperCase() }_TIEMPO`] = questions[i].completionTime;
   }
   return data;
+}
+
+function getQuestions (forms) {
+  let questionLabels = [];
+  for (let i = 0; i < questions.length; i++) {
+    questionLabels.push(
+      `${ questions[i].id.toUpperCase() }_CORRECTA`,
+      `${ questions[i].id.toUpperCase() }_RESPUESTA`,
+      `${ questions[i].id.toUpperCase() }_TIEMPO`
+    );
+  };
+  let csvData = json2csv({
+    fields: [
+      { label: 'ID', value: 'id' },
+      ...questionLabels
+    ],
+    data: forms.map(form => ({
+      id: form.id,
+      ...mapQuestions(form.questions)
+    }))
+  });
+  return csvData;
+}
+
+function getData (forms) {
+  let csvData = json2csv({
+    fields: [
+      { label: 'ID', value: 'id' },
+      { label: 'FECHA', value: 'ts' },
+      { label: 'EMAIL', value: 'email' },
+      { label: 'EDAD', value: 'age' },
+      { label: 'GENERO', value: 'gender' },
+      { label: 'EDUCACION', value: 'educationLevel' },
+      { label: 'USO_MORAVEC', value: 'triedMoravec' },
+      { label: 'FORMULARIO_COMPLETO', value: 'isFinished' },
+      { label: 'PREGUNTAS_CONTESTADAS', value: 'answeredQuestionsAmount' },
+      { label: 'PREGUNTAS_CORRECTAS', value: 'correctQuestionsAmount' },
+      { label: 'TIEMPO_TOTAL', value: 'totalCompletionTime' },
+      { label: 'COMENTARIO', value: 'comment' }
+    ],
+    data: forms.map(form => ({
+      id: form.id,
+      ts: moment(form.ts, 'X').format('DD/MM/YYYY HH:mm'),
+      email: form.email,
+      age: form.age || '',
+      gender: form.gender || '',
+      educationLevel: form.educationLevel || '',
+      triedMoravec: form.triedMoravec || '',
+      comment: form.comment ? form.comment.replace(/,/g, ';') : '',
+      isFinished: form.isFinished ? 'Si' : 'No',
+      answeredQuestionsAmount: form.answeredQuestionsAmount,
+      correctQuestionsAmount: form.correctQuestionsAmount,
+      totalCompletionTime: form.totalCompletionTime || ''
+    }))
+  });
+  return csvData;
 }
 
 export default async function (config, state, req, res, next) {
@@ -50,48 +106,10 @@ export default async function (config, state, req, res, next) {
 
     bunyan.info('[FORMS-CSV] success', { results: results.length });
 
-    let questionLabels = [];
-    for (let i = 0; i < questions.length; i++) {
-      questionLabels.push(
-        { label: `P${ i+1 } es correcta`, value: `q${ i }IsCorrect` },
-        { label: `P${ i+1 } respuesta`, value: `q${ i }Answer` },
-        { label: `P${ i+1 } tiempo (ms)`, value: `q${ i }CompletionTime` }
-      );
-    };
+    let csvData = type === 'data' ? getData(results) : getQuestions(results);
 
-    let csvData = json2csv({
-      fields: [
-        { label: 'Fecha', value: 'ts' },
-        { label: 'Email', value: 'email' },
-        { label: 'Edad', value: 'age' },
-        { label: 'Sexo', value: 'gender' },
-        { label: 'Nivel de educacion', value: 'educationLevel' },
-        { label: 'Uso Moravec', value: 'triedMoravec' },
-        { label: 'Formulario completado', value: 'isFinished' },
-        { label: 'Preguntas contestadas', value: 'answeredQuestionsAmount' },
-        { label: 'Preguntas correctas', value: 'correctQuestionsAmount' },
-        { label: 'Tiempo total (ms)', value: 'totalCompletionTime' },
-        ...questionLabels,
-        { label: 'Comentario', value: 'comment' }
-      ],
-      data: results.map(form => ({
-        ts: moment(form.ts, 'X').format('DD/MM/YYYY HH:mm'),
-        email: form.email,
-        age: form.age || '',
-        gender: form.gender || '',
-        educationLevel: form.educationLevel || '',
-        triedMoravec: form.triedMoravec || '',
-        comment: form.comment ? form.comment.replace(/,/g, ';') : '',
-        isFinished: form.isFinished ? 'Si' : 'No',
-        answeredQuestionsAmount: form.answeredQuestionsAmount,
-        correctQuestionsAmount: form.correctQuestionsAmount,
-        totalCompletionTime: form.totalCompletionTime || '',
-        ...mapQuestions(form.questions)
-      }))
-    })
-
-    res.set({ "Content-Disposition": "attachment; filename='data.csv'" });
-    res.setHeader("Content-type", "text/csv");
+    res.set({ 'Content-Disposition': `attachment; filename='${ type }.csv'` });
+    res.setHeader('Content-type', 'text/csv');
     res.send(csvData);
 
   } catch (error) {
