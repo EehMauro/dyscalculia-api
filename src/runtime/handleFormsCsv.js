@@ -53,7 +53,7 @@ function getData (forms) {
     ],
     data: forms.map(form => ({
       id: form.id,
-      ts: moment(form.ts, 'X').format('DD/MM/YYYY HH:mm'),
+      ts: moment(form.ts, 'X').utcOffset("-03:00").format('DD/MM/YYYY HH:mm'),
       email: form.email,
       age: form.age || '',
       gender: form.gender || '',
