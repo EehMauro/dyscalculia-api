@@ -33,7 +33,13 @@ export default async function (config, state, req, res, next) {
           os: parseOS(req.headers['user-agent']).toString(),
           device: parseDevice(req.headers['user-agent']).toString()
         },
-        questions: []
+        questions: [],
+        comment: null,
+        triedMoravec: null,
+        answeredQuestionsAmount: 0,
+        correctQuestionsAmount: 0,
+        totalCompletionTime: null,
+        isFinished: false
       },
       Key: {
         email: formData.email
