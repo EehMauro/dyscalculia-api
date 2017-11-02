@@ -55,7 +55,7 @@ export default async function (config, state, req, res, next) {
       questionLabels.push(
         { label: `P${ i+1 } es correcta`, value: `q${ i }IsCorrect` },
         { label: `P${ i+1 } respuesta`, value: `q${ i }Answer` },
-        { label: `P${ i+1 } tiempo`, value: `q${ i }CompletionTime` }
+        { label: `P${ i+1 } tiempo (ms)`, value: `q${ i }CompletionTime` }
       );
     };
 
@@ -70,7 +70,7 @@ export default async function (config, state, req, res, next) {
         { label: 'Formulario completado', value: 'isFinished' },
         { label: 'Preguntas contestadas', value: 'answeredQuestionsAmount' },
         { label: 'Preguntas correctas', value: 'correctQuestionsAmount' },
-        { label: 'Tiempo total (seg)', value: 'totalCompletionTime' },
+        { label: 'Tiempo total (ms)', value: 'totalCompletionTime' },
         ...questionLabels,
         { label: 'Comentario', value: 'comment' }
       ],
