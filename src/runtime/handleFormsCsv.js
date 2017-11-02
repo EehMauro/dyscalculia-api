@@ -106,7 +106,7 @@ export default async function (config, state, req, res, next) {
 
     bunyan.info('[FORMS-CSV] success', { results: results.length });
 
-    let csvData = type === 'data' ? getData(results) : getQuestions(results);
+    let csvData = type === 'alldata' ? getData(results) : getQuestions(results);
 
     res.set({ 'Content-Disposition': `attachment; filename='${ type }.csv'` });
     res.setHeader('Content-type', 'text/csv');
