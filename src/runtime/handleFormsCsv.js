@@ -3,12 +3,28 @@ import json2csv from 'json2csv';
 import { scanItems } from '../persistence';
 import { FORMS_TABLE, questions } from '../conventions';
 
-function mapQuestions (questions) {
+function mapQuestions (fquestions) {
   let data = {};
-  for (let i = 0; i < questions.length; i++) {
-    data[`${ questions[i].id.toUpperCase() }_CORRECTA`] = questions[i].isCorrect ? 1 : 0;
-    data[`${ questions[i].id.toUpperCase() }_RESPUESTA`] = questions[i].answer || -999;
-    data[`${ questions[i].id.toUpperCase() }_TIEMPO`] = questions[i].completionTime || -999;
+  for (let i = 0; i < fquestions.length; i++) {
+    data[`${ fquestions[i].id.toUpperCase() }_CORRECTA`] = fquestions[i].isCorrect ? 1 : 0;
+    data[`${ fquestions[i].id.toUpperCase() }_TIEMPO`] = fquestions[i].completionTime || -999;
+    if (fquestions[i].answer) {
+      let question = questions.find(q => q.id === fquestions[i].id);
+      if (question.type === 'multiple-choice-question') {
+        data[`${ fquestions[i].id.toUpperCase() }_RESPUESTA`] = question.options.indexOf(fquestions[i].answer) + 1;
+      }
+      if (question.type === 'scale-question') {
+        data[`${ fquestions[i].id.toUpperCase() }_RESPUESTA`] = fquestions[i].isCorrect ? 1 : 0;
+      }
+      if (question.type === 'visuospatial-question') {
+        data[`${ fquestions[i].id.toUpperCase() }_RESPUESTA`] = fquestions[i].answer;
+      }
+      if (question.type === 'mirror-question') {
+        data[`${ fquestions[i].id.toUpperCase() }_RESPUESTA`] = fquestions[i].answer === 'Si' ? 1 : 0;
+      }
+    } else {
+      data[`${ fquestions[i].id.toUpperCase() }_RESPUESTA`] = -999;
+    }
   }
   return data;
 }
