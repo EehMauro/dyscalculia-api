@@ -5,7 +5,7 @@ import { generateFormToken } from '../utils';
 import { FORMS_TABLE } from '../conventions';
 
 function getRandomId () {
-  Math.round(Math.random() * 8999999999) + 1000000000
+  return Math.round(Math.random() * 8999999999) + 1000000000
 }
 
 export default async function (config, state, req, res, next) {
