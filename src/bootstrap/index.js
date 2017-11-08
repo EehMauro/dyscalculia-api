@@ -10,7 +10,7 @@ export async function setupStateAsync (config) {
     stream: config.LOG_STREAM
   });
 
-  let dynamoClient = setupDynamoDb({
+  let { dynamoClient, dynamoDB } = setupDynamoDb({
     region: config.AWS_REGION,
     accessKeyId: config.AWS_ACCESSKEYID,
     secretAccessKey: config.AWS_SECRETACCESSKEY
@@ -21,6 +21,6 @@ export async function setupStateAsync (config) {
     port: config.RESTIFY_PORT
   }, bunyan);
 
-  return { bunyan, dynamoClient, restify };
+  return { bunyan, dynamoClient, dynamoDB, restify };
 
 }

@@ -6,6 +6,11 @@ export default function (config) {
   
   let dynamoClient = new AWS.DynamoDB.DocumentClient();
 
-  return dynamoClient;
+  let dynamoDB = new AWS.DynamoDB();
+
+  return {
+    dynamoClient,
+    dynamoDB
+  }
   
 }

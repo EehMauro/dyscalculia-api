@@ -51,7 +51,7 @@ function getQuestions (forms) {
       { label: 'ID', value: 'id' },
       ...questionLabels
     ],
-    data: forms.map(form => ({
+    data: forms.sort((f1, f2) => f1.ts - f2.ts).map(form => ({
       id: form.id,
       ...mapQuestions(form)
     }))
@@ -77,7 +77,7 @@ function getData (forms) {
       { label: 'TIEMPO_TOTAL', value: 'totalCompletionTime' },
       { label: 'COMENTARIO', value: 'comment' }
     ],
-    data: forms.map(form => ({
+    data: forms.sort((f1, f2) => f1.ts - f2.ts).map(form => ({
       id: form.id,
       ts: moment(form.ts, 'X').utcOffset("-03:00").format('DD/MM/YYYY HH:mm'),
       email: form.email,
@@ -152,7 +152,7 @@ export default async function (config, state, req, res, next) {
 
   const { bunyan, dynamoClient } = state;
 
-  let { fromDate, toDate, type } = req.params;
+  let { type } = req.params;
 
   bunyan.info('[FORMS-CSV] received');
 
@@ -162,32 +162,22 @@ export default async function (config, state, req, res, next) {
 
     if (type !== 'specification') {
 
-      let FilterExpression = '';
-      let ExpressionAttributeNames = {};
-      let ExpressionAttributeValues = {};
 
-      if (fromDate) {
-        FilterExpression += (FilterExpression === '' ? '' : ' AND ') + '#ts >= :fromDate';
-        ExpressionAttributeNames['#ts'] = 'ts';
-        ExpressionAttributeValues[':fromDate'] = fromDate;
-      }
+      let forms = [], lastKey = undefined;
 
-      if (toDate) {
-        FilterExpression += (FilterExpression === '' ? '' : ' AND ') + '#ts <= :toDate';
-        ExpressionAttributeNames['#ts'] = 'ts';
-        ExpressionAttributeValues[':toDate'] = toDate;
-      }
+      do {
 
-      let params = {
-        TableName: FORMS_TABLE,
-        FilterExpression: FilterExpression !== '' ? FilterExpression : undefined,
-        ExpressionAttributeNames: Object.keys(ExpressionAttributeNames).length ? ExpressionAttributeNames : undefined,
-        ExpressionAttributeValues: Object.keys(ExpressionAttributeValues).length ? ExpressionAttributeValues : undefined
-      };
+        let params = { TableName: FORMS_TABLE, ExclusiveStartKey: lastKey };
 
-      let { results } = await scanItems(params, dynamoClient);
+        let { results, lastKey: newLastKey } = await scanItems(params, dynamoClient);
 
-      csvData = type === 'alldata' ? getData(results) : getQuestions(results);
+        lastKey = newLastKey;
+
+        forms.push(...results);
+
+      } while (lastKey);
+
+      csvData = type === 'alldata' ? getData(forms) : getQuestions(forms);
 
     } else {
 

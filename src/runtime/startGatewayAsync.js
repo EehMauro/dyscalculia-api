@@ -3,6 +3,7 @@ import handleListQuestions from './handleListQuestions';
 import handleCreateForm from './handleCreateForm';
 import handleUpdateForm from './handleUpdateForm';
 import handleListForms from './handleListForms';
+import handleCountForms from './handleCountForms';
 import handleFormsCsv from './handleFormsCsv';
 import handleDetailForm from './handleDetailForm';
 import handleDoAuthentication from './handleDoAuthentication';
@@ -34,6 +35,12 @@ export default async function (config, state) {
     '/forms',
     curry(checkSessionToken)(config, state),
     curry(handleListForms)(config, state)
+  );
+
+  restify.get(
+    '/forms/count',
+    curry(checkSessionToken)(config, state),
+    curry(handleCountForms)(config, state)
   );
 
   restify.get(
