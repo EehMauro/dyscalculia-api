@@ -141,7 +141,7 @@ export default [
     label: 'Seleccione la figura que es igual a la que se muestra a continuación',
     image: '/images/q20-question.png',
     options: ['/images/q20-answer-1.png', '/images/q20-answer-2.png', '/images/q20-answer-3.png'],
-    correctAnswer: 1
+    correctAnswer: 0
   },
   {
     id: 'q21',
@@ -149,7 +149,7 @@ export default [
     label: '¿Cuál de las imágenes de abajo es una figura espejadas de la que se muestra a continuación?',
     image: '/images/q21-question.png',
     options: ['/images/q21-answer-1.png', '/images/q21-answer-2.png', '/images/q21-answer-3.png'],
-    correctAnswer: 1
+    correctAnswer: 2
   },
   {
     id: 'q22',

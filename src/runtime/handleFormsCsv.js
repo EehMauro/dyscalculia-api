@@ -16,20 +16,7 @@ function mapQuestions (form) {
       let { isCorrect, completionTime, answer } = q;
       data[`${ questionId }_CORRECTA`] = isCorrect ? 1 : 0;
       data[`${ questionId }_TIEMPO`] = completionTime || -999;
-      switch (question.type) {
-        case 'multiple-choice-question':
-          data[`${ questionId }_RESPUESTA`] = question.options.indexOf(answer) + 1;
-          break;
-        case 'scale-question':
-          data[`${ questionId }_RESPUESTA`] = isCorrect ? 1 : 0;
-          break;
-        case 'visuospatial-question':
-          data[`${ questionId }_RESPUESTA`] = answer;
-          break;
-        case 'mirror-question':
-          data[`${ questionId }_RESPUESTA`] = answer === 'Si' ? 1 : 0;
-          break;
-      }
+      data[`${ questionId }_RESPUESTA`] = question.options.indexOf(answer) + 1;
     }
   }
   return data;
@@ -59,6 +46,26 @@ function getQuestions (forms) {
   return csvData;
 }
 
+function getGenderValue (gender) {
+  switch (gender) {
+    case 'female': return 1;
+    case 'male': return 2;
+    case 'other': return 3;
+    default: return -999;
+  }
+}
+
+function getEducationValue (education) {
+  switch (education) {
+    case 'none': return 1;
+    case 'primary': return 2;
+    case 'high-school': return 3;
+    case 'academic': return 4;
+    case 'postgraduate': return 5;
+    default: return -999;
+  }
+}
+
 function getData (forms) {
   let csvData = json2csv({
     excelStrings: true,
@@ -70,6 +77,7 @@ function getData (forms) {
       { label: 'EDAD', value: 'age' },
       { label: 'GENERO', value: 'gender' },
       { label: 'EDUCACION', value: 'educationLevel' },
+      { label: 'DISPOSITIVO', value: 'deviceType' },
       { label: 'USO_MORAVEC', value: 'triedMoravec' },
       { label: 'FORMULARIO_COMPLETO', value: 'isFinished' },
       { label: 'PREGUNTAS_CONTESTADAS', value: 'answeredQuestionsAmount' },
@@ -81,43 +89,40 @@ function getData (forms) {
       id: form.id,
       ts: moment(form.ts, 'X').utcOffset("-03:00").format('DD/MM/YYYY HH:mm'),
       email: form.email,
-      age: form.age || '',
-      gender: form.gender || '',
-      educationLevel: form.educationLevel || '',
-      triedMoravec: form.triedMoravec || '',
+      age: form.age || -999,
+      gender: getGenderValue(form.gender),
+      educationLevel: getEducationValue(form.educationLevel),
+      deviceType: form.deviceType === 'desktop' ? 1 : 2,
+      triedMoravec: form.triedMoravec ? 1 : 0,
       comment: form.comment ? form.comment.replace(/;/g, ',') : '',
-      isFinished: form.isFinished ? 'Si' : 'No',
-      answeredQuestionsAmount: form.answeredQuestionsAmount || '',
-      correctQuestionsAmount: form.correctQuestionsAmount || '',
-      totalCompletionTime: form.totalCompletionTime || ''
+      isFinished: form.isFinished ? 1 : 0,
+      answeredQuestionsAmount: form.answeredQuestionsAmount || -999,
+      correctQuestionsAmount: form.correctQuestionsAmount || -999,
+      totalCompletionTime: form.totalCompletionTime || -999
     }))
   });
   return csvData;
 }
 
-function getSpecifications () {
+function getQuestionsSpecifications () {
   let csvData = json2csv({
     excelStrings: true,
     del: ';',
     fields: [
       { label: 'ID', value: 'id' },
       { label: 'PREGUNTA', value: 'label' },
-      { label: '0', value: 'opt0' },
       { label: '1', value: 'opt1' },
       { label: '2', value: 'opt2' },
       { label: '3', value: 'opt3' },
-      { label: '4', value: 'opt4' },
       { label: 'CORRECTA', value: 'correct' }
     ],
     data: questions.map(question => {  
       let record = {
         id: question.id.toUpperCase(),
         label: question.label,
-        opt0: '',
         opt1: '',
         opt2: '',
         opt3: '',
-        opt4: '',
         correct: '',
       };
       if (question.type === 'multiple-choice-question') {
@@ -126,24 +131,39 @@ function getSpecifications () {
         }
         record.correct = question.options.indexOf(question.correctAnswer) + 1;
       }
-      if (question.type === 'scale-question') {
-        record.opt0 = `DIFERENTE DE ${ question.correctAnswer }`;
-        record.opt1 = question.correctAnswer;
-        record.correct = 1;
-      }
-      if (question.type === 'visuospatial-question') {
-        record.opt1 = 1;
-        record.opt2 = 2;
-        record.opt3 = 3;
-        record.correct = 1;
-      }
-      if (question.type === 'mirror-question') {
-        record.opt0 = 'No';
-        record.opt1 = 'Si';
-        record.correct = 1;
+      if (question.type === 'image-multiple-choice-question') {
+        for (let i = 0; i < question.options.length; i++) {
+          record[`opt${ i+1 }`] = i + 1;
+        }
+        record.correct = question.correctAnswer + 1;
       }
       return record;
     })
+  });
+  return csvData;
+}
+
+function getDataSpecifications () {
+  let csvData = json2csv({
+    excelStrings: true,
+    del: ';',
+    fields: [
+      { label: 'CAMPO', value: 'field' },
+      { label: 'OPCION', value: 'option' },
+      { label: 'VALOR', value: 'value' }
+    ],
+    data: [
+      { field: 'GENERO', option: '1', value: 'Mujer' },
+      { field: 'GENERO', option: '2', value: 'Varón' },
+      { field: 'GENERO', option: '3', value: 'Otro' },
+      { field: 'EDUCACION', option: '1', value: 'Ninguno' },
+      { field: 'EDUCACION', option: '2', value: 'Primario' },
+      { field: 'EDUCACION', option: '3', value: 'Secundario' },
+      { field: 'EDUCACION', option: '4', value: 'Terciario / Universitario' },
+      { field: 'EDUCACION', option: '5', value: 'Posgrado' },
+      { field: 'DISPOSITIVO', option: '1', value: 'PC / Mac' },
+      { field: 'DISPOSITIVO', option: '2', value: 'Celular / Tablet' },
+    ]
   });
   return csvData;
 }
@@ -160,7 +180,7 @@ export default async function (config, state, req, res, next) {
 
     let csvData = null;
 
-    if (type !== 'specification') {
+    if (type.indexOf('specification') === -1) {
 
 
       let forms = [], lastKey = undefined;
@@ -181,7 +201,9 @@ export default async function (config, state, req, res, next) {
 
     } else {
 
-      csvData = getSpecifications();
+      if (type === 'questions-specification')  csvData = getQuestionsSpecifications();
+
+      if (type === 'data-specification')  csvData = getDataSpecifications();
 
     }
 
