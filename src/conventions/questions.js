@@ -93,7 +93,7 @@ export default [
   {
     id: 'q14',
     type: 'multiple-choice-question',
-    label: '¿Qué diferencia es menor, la diferencia entre 103 y 98 o la diferencia entre 17 y 11 o entre 201 y 191?',
+    label: '¿Qué diferencia es menor, la diferencia entre 103 y 98, la diferencia entre 17 y 11 o la diferencia entre 201 y 191?',
     options: ['La diferencia entre 103 y 98', 'La diferencia entre 17 y 11', 'La diferencia entre 201 y 191'],
     correctAnswer: 'La diferencia entre 103 y 98'
   },
@@ -107,7 +107,7 @@ export default [
   {
     id: 'q16',
     type: 'multiple-choice-question',
-    label: 'Sin contar, sólo dando un vistazo, ¿Aproximadamente cuántos lápices estimás que hay?',
+    label: 'Sin contar, sólo dando un vistazo, ¿aproximadamente cuántos lápices estimás que hay?',
     image: '/images/pencils.jpg',
     options: ['25', '80', '50'],
     correctAnswer: '50'
@@ -115,7 +115,7 @@ export default [
   {
     id: 'q17',
     type: 'multiple-choice-question',
-    label: 'Sin contar, sólo dando un vistazo, ¿Aproximadamente cuántos caramelos estimás que hay?',
+    label: 'Sin contar, sólo dando un vistazo, ¿aproximadamente cuántos caramelos estimás que hay?',
     image: '/images/candies.jpg',
     options: ['250', '180', '400'],
     correctAnswer: '250'
@@ -133,7 +133,7 @@ export default [
     label: '¿Que porcentaje de la figura está coloreada?',
     image: '/images/fraction.png',
     options: ['Menor a 10%', 'Entre 10% y 25%', 'Entre 25% y 50%'],
-    correctAnswer: 'Entre 10% y 25%'
+    correctAnswer: 'Entre 25% y 50%'
   },
   {
     id: 'q20',
@@ -146,7 +146,7 @@ export default [
   {
     id: 'q21',
     type: 'image-multiple-choice-question',
-    label: '¿Cuál de las imágenes de abajo es una figura espejadas de la que se muestra a continuación?',
+    label: '¿Cuál de las imágenes de abajo es una figura espejada de la que se muestra a continuación?',
     image: '/images/q21-question.png',
     options: ['/images/q21-answer-1.png', '/images/q21-answer-2.png', '/images/q21-answer-3.png'],
     correctAnswer: 2
@@ -154,7 +154,7 @@ export default [
   {
     id: 'q22',
     type: 'image-multiple-choice-question',
-    label: 'Seleccione la figura que es igual a la que se muestra a continuación',
+    label: 'Seleccione la figura que es igual a la que se muestra a continuación:',
     image: '/images/q22-question.png',
     options: ['/images/q22-answer-1.png', '/images/q22-answer-2.png', '/images/q22-answer-3.png'],
     correctAnswer: 1
@@ -162,9 +162,9 @@ export default [
   {
     id: 'q23',
     type: 'multiple-choice-question',
-    label: 'Sin contar, sólo dando un vistazo, ¿Aproximadamente cuántos fichas estimás que hay?',
+    label: 'Sin contar, sólo dando un vistazo, ¿aproximadamente cuántas fichas estimás que hay?',
     image: '/images/dominos.png',
-    options: ['70', '50', '35'],
+    options: ['70', '50', '25'],
     correctAnswer: '50'
   }
 ];

@@ -111,31 +111,31 @@ function getQuestionsSpecifications () {
     fields: [
       { label: 'ID', value: 'id' },
       { label: 'PREGUNTA', value: 'label' },
-      { label: '1', value: 'opt1' },
-      { label: '2', value: 'opt2' },
-      { label: '3', value: 'opt3' },
+      { label: 'OPCION 1', value: 'option1' },
+      { label: 'OPCION 2', value: 'option2' },
+      { label: 'OPCION 3', value: 'option3' },
       { label: 'CORRECTA', value: 'correct' }
     ],
     data: questions.map(question => {  
       let record = {
         id: question.id.toUpperCase(),
         label: question.label,
-        opt1: '',
-        opt2: '',
-        opt3: '',
+        option1: '',
+        option2: '',
+        option3: '',
         correct: '',
       };
       if (question.type === 'multiple-choice-question') {
         for (let i = 0; i < question.options.length; i++) {
-          record[`opt${ i+1 }`] = question.options[i];
+          record[`option${ i+1 }`] = question.options[i];
         }
         record.correct = question.options.indexOf(question.correctAnswer) + 1;
       }
       if (question.type === 'image-multiple-choice-question') {
         for (let i = 0; i < question.options.length; i++) {
-          record[`opt${ i+1 }`] = i + 1;
+          record[`option${ i+1 }`] = (i + 1).toString();
         }
-        record.correct = question.correctAnswer + 1;
+        record.correct = (question.correctAnswer + 1).toString();
       }
       return record;
     })
