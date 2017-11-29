@@ -2,124 +2,133 @@ export default [
   {
     id: 'q01',
     type: 'multiple-choice-question',
-    label: '¿Cuál es menor: 27 o 32?',
-    options: ['27', '32'],
-    correctAnswer: '27'
+    label: '¿Cuál es menor: 43, 29 o 38?',
+    options: ['43', '29', '38'],
+    correctAnswer: '29'
   },
   {
     id: 'q02',
     type: 'multiple-choice-question',
-    label: '¿Cuánto es el doble de 8?',
-    options: ['16', '4', '10'],
-    correctAnswer: '16'
+    label: '¿Cuánto es el doble de 9?',
+    options: ['16', '18', '19'],
+    correctAnswer: '18'
   },
   {
     id: 'q03',
     type: 'multiple-choice-question',
-    label: '¿Cuánto es 13 + 39?',
-    options: ['26', '49', '52'],
-    correctAnswer: '52'
+    label: '¿Cuánto es 24 + 37?',
+    options: ['61', '51', '74'],
+    correctAnswer: '61'
   },
   {
     id: 'q04',
     type: 'multiple-choice-question',
-    label: 'En un colectivo van veinticinco personas. En la primera parada se bajan seis y se suben dos. ¿Cuántas personas quedan en el colectivo?',
-    options: ['21', '19', '17', '27'],
+    label: 'En un colectivo van veintinueve personas. En la primera parada se bajan trece y se suben cinco. ¿Cuántas personas quedan en el colectivo?',
+    options: ['20', '21', '23'],
     correctAnswer: '21'
   },
   {
     id: 'q05',
     type: 'multiple-choice-question',
-    label: '¿Qué número viene 5 números después de 49?',
-    options: ['54', '44', '99'],
-    correctAnswer: '54'
+    label: '¿Qué número viene 7 números después de 56?',
+    options: ['49', '76', '63'],
+    correctAnswer: '63'
   },
   {
     id: 'q06',
     type: 'multiple-choice-question',
-    label: '¿Qué número está más cerca del 31?',
-    options: ['28', '40', '36'],
-    correctAnswer: '28'
+    label: '¿Qué número está más cerca del 105?',
+    options: ['113', '98', '115'],
+    correctAnswer: '98'
   },
   {
     id: 'q07',
     type: 'multiple-choice-question',
-    label: '¿Cuántos huevos hay en dos docenas y media?',
-    options: ['24 huevos', '36 huevos', '30 huevos'],
-    correctAnswer: '30 huevos'
+    label: '¿Cuántos facturas hay en tres docenas y media?',
+    options: ['36 facturas', '48 facturas', '42 facturas'],
+    correctAnswer: '42 facturas'
   },
   {
     id: 'q08',
     type: 'multiple-choice-question',
-    label: 'Si un libro cuesta $380, ¿cuánto costará una decena de libros?',
-    options: ['$38000', '$380', '$3800'],
-    correctAnswer: '$3800'
+    label: 'Si un libro cuesta $422, ¿cuánto costará una decena de libros?',
+    options: ['$4220', '$4222', '$42200'],
+    correctAnswer: '$4220'
   },
   {
     id: 'q09',
     type: 'multiple-choice-question',
-    label: 'Tengo tres naranjas y media. ¿Cuántas medias naranjas tengo?',
-    options: ['7 medias naranjas', '8 medias naranjas', '4 medias naranjas', '5 medias naranjas'],
-    correctAnswer: '7 medias naranjas'
+    label: 'Tengo seis naranjas y media. ¿Cuántas medias naranjas tengo?',
+    options: ['7 medias naranjas', '15 medias naranjas', '13 medias naranjas'],
+    correctAnswer: '13 medias naranjas'
   },
   {
     id: 'q10',
     type: 'multiple-choice-question',
-    label: 'Han bajado 183 pasajeros del subte y aún quedan dentro 328 pasajeros. ¿Cuántos pasajeros había en el subte?',
-    options: ['511 pasajeros', '366 pasajeros', '145 pasajeros'],
-    correctAnswer: '511 pasajeros'
+    label: 'Han bajado 227 pasajeros del subte y aún quedan dentro 389 pasajeros. ¿Cuántos pasajeros había en el subte?',
+    options: ['616 pasajeros', '516 pasajeros', '162 pasajeros'],
+    correctAnswer: '616 pasajeros'
   },
   {
     id: 'q11',
     type: 'multiple-choice-question',
-    label: 'Quiero comprar un reloj que cuesta $572 y un cuadro de $512, ¿Me alcanzan $1000 para comprar ambos?',
-    options: ['Si', 'No'],
-    correctAnswer: 'No'
+    label: 'Para completar un álbum se necesitan 225 figuritas. Malena tiene 175 y quiere saber cuántas le faltan. ¿Cuál de las siguientes expresiones representa mejor el problema?',
+    options: ['175 + 50 = 225', '225 - 50 = 175', '225 - 175 = 50'],
+    correctAnswer: '225 - 175 = 50'
   },
   {
     id: 'q12',
     type: 'multiple-choice-question',
-    label: 'Un teatro tiene 12 secciones. Cada sección tiene 8 filas y cada fila tiene 10 asientos. ¿Cuántos asientos hay en total?',
-    options: ['200 asientos', '960 asientos', '216 asientos'],
-    correctAnswer: '960 asientos'
+    label: 'Un teatro tiene 6 secciones. Cada sección tiene 8 filas y cada fila tiene 10 asientos. ¿Cuántos asientos hay en total?',
+    options: ['480 asientos', '108 asientos', '140 asientos'],
+    correctAnswer: '480 asientos'
   },
   {
     id: 'q13',
     type: 'multiple-choice-question',
-    label: '¿Qué expresión utilizaría para resolver este problema? La temperatura a las cuatro en punto era de 25°C. A las nueve de la noche, era de 13°C. ¿Cuánto bajó la temperatura?',
-    options: ['9 - 4', '25 + 13', '25 - 13', '25 + 4 - 13'],
-    correctAnswer: '25 - 13'
+    label: '¿Qué expresión utilizaría para resolver este problema? La temperatura a las 9 en punto era de 14°C. A las 11 era de 27°C. ¿Cuánto subió la temperatura?',
+    options: ['27 - 11', '27 - 14', '11 - 9'],
+    correctAnswer: '27 - 14'
   },
   {
     id: 'q14',
     type: 'multiple-choice-question',
-    label: '¿Qué diferencia es menor, la diferencia entre 99 y 92 o la diferencia entre 25 y 11?',
-    options: ['La diferencia entre 99 y 92', 'La diferencia entre 25 y 11'],
-    correctAnswer: 'La diferencia entre 99 y 92'
+    label: '¿Qué diferencia es menor, la diferencia entre 103 y 98 o la diferencia entre 17 y 11 o entre 201 y 191?',
+    options: ['La diferencia entre 103 y 98', 'La diferencia entre 17 y 11', 'La diferencia entre 201 y 191'],
+    correctAnswer: 'La diferencia entre 103 y 98'
   },
   {
     id: 'q15',
     type: 'multiple-choice-question',
-    label: 'En una clase hay 30 alumnos. El día que faltan 6, el porcentaje de inasistencias es...',
-    options: ['6%', '5%', '2%', '20%'],
+    label: 'En una clase hay 20 alumnos. El día que faltan 4, el porcentaje de inasistencias es...',
+    options: ['25%', '5%', '20%'],
     correctAnswer: '20%'
   },
   {
     id: 'q16',
     type: 'multiple-choice-question',
-    label: '¿Aproximadamente cuántos vasos estimás que hay?',
-    image: '/images/glasses.png',
-    options: ['Entre 50 y 100', 'Entre 0 y 20', 'Más de 200'],
-    correctAnswer: 'Entre 50 y 100'
+    label: 'Sin contar, sólo dando un vistazo, ¿Aproximadamente cuántos lápices estimás que hay?',
+    image: '/images/pencils.jpg',
+    options: ['25', '80', '50'],
+    correctAnswer: '50'
   },
   {
     id: 'q17',
-    type: 'scale-question',
-    label: 'Deslizá el círculo sobre la linea y ubicalo en la posición que corresponda al número 70',
-    correctAnswer: 70
+    type: 'multiple-choice-question',
+    label: 'Sin contar, sólo dando un vistazo, ¿Aproximadamente cuántos caramelos estimás que hay?',
+    image: '/images/candies.jpg',
+    options: ['250', '180', '400'],
+    correctAnswer: '250'
   },
   {
     id: 'q18',
+    type: 'multiple-choice-question',
+    label: 'Juan tiene un sueldo mensual de $20000. Cada mes ahorra el 10% de su sueldo. ¿Cuanto habrá ahorrado en 5 meses?',
+    options: ['$10000', '$1000', '$5000'],
+    correctAnswer: '$10000'
+  },
+  {
+    id: 'q19',
     type: 'multiple-choice-question',
     label: '¿Que porcentaje de la figura está coloreada?',
     image: '/images/fraction.png',
@@ -127,19 +136,35 @@ export default [
     correctAnswer: 'Entre 10% y 25%'
   },
   {
-    id: 'q19',
-    type: 'visuospatial-question',
+    id: 'q20',
+    type: 'image-multiple-choice-question',
     label: 'Seleccione la figura que es igual a la que se muestra a continuación',
-    image: '/images/visuospatial.png',
-    options: ['/images/visuospatial-answer-1.png', '/images/visuospatial-answer-2.png', '/images/visuospatial-answer-3.png'],
+    image: '/images/q20-question.png',
+    options: ['/images/q20-answer-1.png', '/images/q20-answer-2.png', '/images/q20-answer-3.png'],
     correctAnswer: 1
   },
   {
-    id: 'q20',
-    type: 'mirror-question',
-    label: '¿Son estas imágenes figuras espejadas una de la otra?',
-    imageOriginal: '/images/mirror-1.png',
-    imageMirrored: '/images/mirror-2.png',
-    correctAnswer: 'Si'
+    id: 'q21',
+    type: 'image-multiple-choice-question',
+    label: '¿Cuál de las imágenes de abajo es una figura espejadas de la que se muestra a continuación?',
+    image: '/images/q21-question.png',
+    options: ['/images/q21-answer-1.png', '/images/q21-answer-2.png', '/images/q21-answer-3.png'],
+    correctAnswer: 1
+  },
+  {
+    id: 'q22',
+    type: 'image-multiple-choice-question',
+    label: 'Seleccione la figura que es igual a la que se muestra a continuación',
+    image: '/images/q22-question.png',
+    options: ['/images/q22-answer-1.png', '/images/q22-answer-2.png', '/images/q22-answer-3.png'],
+    correctAnswer: 1
+  },
+  {
+    id: 'q23',
+    type: 'multiple-choice-question',
+    label: 'Sin contar, sólo dando un vistazo, ¿Aproximadamente cuántos fichas estimás que hay?',
+    image: '/images/dominos.png',
+    options: ['70', '50', '35'],
+    correctAnswer: '50'
   }
 ];

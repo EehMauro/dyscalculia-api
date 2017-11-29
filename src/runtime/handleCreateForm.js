@@ -8,6 +8,15 @@ function getRandomId () {
   return Math.round(Math.random() * 8999999999) + 1000000000
 }
 
+function getDeviceType (req) {
+  let os = parseOS(req.headers['user-agent']).toString();
+  if (os.indexOf('iOS') !== -1 || os.indexOf('Android') !== -1 || os.indexOf('Windows Phone') !== -1) {
+    return 'mobile';
+  } else {
+    return 'desktop';
+  }
+}
+
 export default async function (config, state, req, res, next) {
 
   const { bunyan, dynamoClient } = state;
@@ -38,6 +47,7 @@ export default async function (config, state, req, res, next) {
           os: parseOS(req.headers['user-agent']).toString(),
           device: parseDevice(req.headers['user-agent']).toString()
         },
+        deviceType: getDeviceType(req),
         questions: [],
         comment: null,
         triedMoravec: null,
