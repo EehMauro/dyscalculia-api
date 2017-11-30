@@ -108,7 +108,7 @@ export default [
     id: 'q16',
     type: 'multiple-choice-question',
     label: 'Sin contar, sólo dando un vistazo, ¿aproximadamente cuántos lápices estimás que hay?',
-    image: '/images/pencils.jpg',
+    image: 'https://s3.amazonaws.com/dyscalculia/pencils.jpg',
     options: ['25', '80', '50'],
     correctAnswer: '50'
   },
@@ -116,7 +116,7 @@ export default [
     id: 'q17',
     type: 'multiple-choice-question',
     label: 'Sin contar, sólo dando un vistazo, ¿aproximadamente cuántos caramelos estimás que hay?',
-    image: '/images/candies.jpg',
+    image: 'https://s3.amazonaws.com/dyscalculia/candies.jpg',
     options: ['250', '180', '400'],
     correctAnswer: '250'
   },
@@ -131,7 +131,7 @@ export default [
     id: 'q19',
     type: 'multiple-choice-question',
     label: '¿Que porcentaje de la figura está coloreada?',
-    image: '/images/fraction.png',
+    image: 'https://s3.amazonaws.com/dyscalculia/fraction.png',
     options: ['Menor a 10%', 'Entre 10% y 25%', 'Entre 25% y 50%'],
     correctAnswer: 'Entre 25% y 50%'
   },
@@ -139,31 +139,31 @@ export default [
     id: 'q20',
     type: 'image-multiple-choice-question',
     label: 'Seleccione la figura que es igual a la que se muestra a continuación',
-    image: '/images/q20-question.png',
-    options: ['/images/q20-answer-1.png', '/images/q20-answer-2.png', '/images/q20-answer-3.png'],
+    image: 'https://s3.amazonaws.com/dyscalculia/q20-question.png',
+    options: ['https://s3.amazonaws.com/dyscalculia/q20-answer-1.png', 'https://s3.amazonaws.com/dyscalculia/q20-answer-2.png', 'https://s3.amazonaws.com/dyscalculia/q20-answer-3.png'],
     correctAnswer: 0
   },
   {
     id: 'q21',
     type: 'image-multiple-choice-question',
     label: '¿Cuál de las imágenes de abajo es una figura espejada de la que se muestra a continuación?',
-    image: '/images/q21-question.png',
-    options: ['/images/q21-answer-1.png', '/images/q21-answer-2.png', '/images/q21-answer-3.png'],
+    image: 'https://s3.amazonaws.com/dyscalculia/q21-question.png',
+    options: ['https://s3.amazonaws.com/dyscalculia/q21-answer-1.png', 'https://s3.amazonaws.com/dyscalculia/q21-answer-2.png', 'https://s3.amazonaws.com/dyscalculia/q21-answer-3.png'],
     correctAnswer: 2
   },
   {
     id: 'q22',
     type: 'image-multiple-choice-question',
     label: 'Seleccione la figura que es igual a la que se muestra a continuación:',
-    image: '/images/q22-question.png',
-    options: ['/images/q22-answer-1.png', '/images/q22-answer-2.png', '/images/q22-answer-3.png'],
+    image: 'https://s3.amazonaws.com/dyscalculia/q22-question.png',
+    options: ['https://s3.amazonaws.com/dyscalculia/q22-answer-1.png', 'https://s3.amazonaws.com/dyscalculia/q22-answer-2.png', 'https://s3.amazonaws.com/dyscalculia/q22-answer-3.png'],
     correctAnswer: 1
   },
   {
     id: 'q23',
     type: 'multiple-choice-question',
     label: 'Sin contar, sólo dando un vistazo, ¿aproximadamente cuántas fichas estimás que hay?',
-    image: '/images/dominos.png',
+    image: 'https://s3.amazonaws.com/dyscalculia/dominos.png',
     options: ['70', '50', '25'],
     correctAnswer: '50'
   }
