@@ -44,7 +44,7 @@ export default [
   {
     id: 'q07',
     type: 'multiple-choice-question',
-    label: '¿Cuántos facturas hay en tres docenas y media?',
+    label: '¿Cuántas facturas hay en tres docenas y media?',
     options: ['36 facturas', '48 facturas', '42 facturas'],
     correctAnswer: '42 facturas'
   },
