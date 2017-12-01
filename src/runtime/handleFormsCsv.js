@@ -96,7 +96,7 @@ function getData (forms) {
       triedMoravec: form.triedMoravec ? 1 : 0,
       comment: form.comment ? form.comment.replace(/;/g, ',') : '',
       isFinished: form.isFinished ? 1 : 0,
-      answeredQuestionsAmount: form.answeredQuestionsAmount || -999,
+      answeredQuestionsAmount: form.questions ? form.questions.filter(q => q.answer !== null).length : 0,
       correctQuestionsAmount: form.correctQuestionsAmount || -999,
       totalCompletionTime: form.totalCompletionTime || -999
     }))

@@ -33,7 +33,7 @@ export default async function (config, state, req, res, next) {
         questions: questions,
         comment: comment ? comment : null,
         triedMoravec: triedMoravec !== undefined ? triedMoravec : null,
-        answeredQuestionsAmount: questions.filter(q => q.answer).length,
+        answeredQuestionsAmount: questions.filter(q => q.answer !== null).length,
         correctQuestionsAmount: questions.filter(q => q.isCorrect).length,
         totalCompletionTime: finished ? questions.map(q => q.completionTime).reduce((a, b) => a + b, 0) : null,
         isFinished: !!finished
