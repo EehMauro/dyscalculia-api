@@ -8,7 +8,7 @@ async function start () {
   dotenv.load({ silent: true });
 
   const config = {
-    DOMAIN: 'dyscalculia-api-v1',
+    DOMAIN: 'queso-api-v3',
     LOG_LEVEL: process.env.LOG_LEVEL || 'info',
     LOG_STREAM: process.stdout,
     AWS_REGION: process.env.AWS_REGION,

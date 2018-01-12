@@ -1,7 +1,7 @@
 import questions from './questions';
 
-const FORMS_TABLE = 'dyscalculia-forms-v2';
-const USERS_TABLE = 'dyscalculia-users-v1';
+const FORMS_TABLE = 'queso-forms-v3';
+const USERS_TABLE = 'queso-users';
 
 export {
   questions,

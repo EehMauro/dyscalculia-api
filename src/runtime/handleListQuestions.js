@@ -1,3 +1,4 @@
+import shuffle from 'shuffle-array';
 import { questions } from '../conventions';
 
 export default async function (config, state, req, res, next) {
@@ -6,7 +7,7 @@ export default async function (config, state, req, res, next) {
 
   bunyan.info('[LIST-QUESTIONS] received');
 
-  const results = questions;
+  const results = shuffle(questions);
 
   bunyan.info('[LIST-QUESTIONS] success', { results: results.length });
 
